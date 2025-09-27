@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 
 // app.use(cors());
 app.use(cors({
-  origin: 'https://next-watch-nine.vercel.app', // ton URL de production
+  origin: 'https://next-watch-nine.vercel.app',
   credentials: true
 }));
 
