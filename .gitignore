@@ -1,0 +1,12 @@
+# Ignorer les fichiers vidéos et images uploadés
+uploads/movies/
+uploads/thumbnails/
+.env
+/uploads/
+# # Media lourds
+# *.mp4
+# *.mov
+# *.avi
+# *.zip
+# *.rar
+# *.psd
