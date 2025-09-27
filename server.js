@@ -17,9 +17,10 @@ const PORT = process.env.PORT || 5000;
 
 // app.use(cors());
 app.use(cors({
-  origin: 'https://next-watch-git-main-pascal-yaos-projects.vercel.app',
+  origin: 'https://next-watch-nine.vercel.app', // ton URL de production
   credentials: true
 }));
+
 app.use(express.json());
 // app.use(express.urlencoded({ extended: true }));
 
