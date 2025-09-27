@@ -3,10 +3,12 @@ const path = require("path");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        if(file.fieldname === "movie") {
+        if (file.fieldname === "movie") {
             cb(null, "uploads/movies");
         } else if (file.fieldname === "thumbnail") {
             cb(null, "uploads/thumbnails");
+        } else {
+            cb(new Error("Champ inattendu : " + file.fieldname));
         }
     },
 
@@ -18,18 +20,20 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-    const ext = path.extname(file.originalname).toLocaleLowerCase();
-    const extAllowedMovie = [".mp4", ".avi"]
+    const ext = path.extname(file.originalname).toLowerCase();
+    const extAllowedMovie = [".mp4", ".avi"];
     const extAllowedThumb = ['.jpeg', '.png', '.jpg', '.avif'];
 
-    if(file.filename === "movie" && ext !== extAllowedMovie) {
-        return cb(new Error("Extension autorisé : mp4"));
-    }
-
-    if(file.filename === "thumbnail") {
-        if(!extAllowedThumb.includes(ext)) {
-            return cb(new Error("Les extension autorisé : 'jpeg', 'png', 'jpg', 'avif'"));
+    if (file.fieldname === "movie") {
+        if (!extAllowedMovie.includes(ext)) {
+            return cb(new Error("Extensions autorisées pour les vidéos : .mp4, .avi"));
         }
+    } else if (file.fieldname === "thumbnail") {
+        if (!extAllowedThumb.includes(ext)) {
+            return cb(new Error("Extensions autorisées pour les miniatures : .jpeg, .png, .jpg, .avif"));
+        }
+    } else {
+        return cb(new Error("Champ de fichier non autorisé : " + file.fieldname));
     }
 
     cb(null, true);
@@ -40,7 +44,7 @@ const thumbnailsAndMoviesUpload = multer({
     fileFilter
 }).fields([
     { name: "movie", maxCount: 1 },
-    { name: "thumbnail", maxCount : 1 }
+    { name: "thumbnail", maxCount: 1 }
 ]);
 
 module.exports = { thumbnailsAndMoviesUpload };
