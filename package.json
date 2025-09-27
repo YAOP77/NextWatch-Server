@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "create-admin": "node ./scripts/admin.js",
+    "create-admin": "node ./script/admin.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
