@@ -50,19 +50,6 @@ const UploadMovies = async (req, res) => {
         console.log("Données film :", newMovie);
 
         await newMovie.save();
-        // Vérifie et crée le dossier thumbnails
-        const thumbnailsDir = path.join(__dirname, '..', 'uploads', 'thumbnails');
-        if (!fs.existsSync(thumbnailsDir)) {
-        fs.mkdirSync(thumbnailsDir, { recursive: true });
-        console.log('Dossier thumbnails créé');
-        }
-
-        // Vérifie et crée le dossier movies
-        const moviesDir = path.join(__dirname, '..', 'uploads', 'movies');
-        if (!fs.existsSync(moviesDir)) {
-        fs.mkdirSync(moviesDir, { recursive: true });
-        console.log('Dossier movies créé');
-        }
 
         return res.status(201).json({ message: "Film publié avec succès." });
     } catch (error) {

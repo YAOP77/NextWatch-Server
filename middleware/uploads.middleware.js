@@ -1,6 +1,18 @@
 const multer = require('multer');
 const path = require("path");
 
+// Dossiers à vérifier
+const thumbnailsDir = path.join(__dirname, '..', 'uploads', 'thumbnails');
+const moviesDir = path.join(__dirname, '..', 'uploads', 'movies');
+
+// Création des dossiers AVANT le stockage
+[thumbnailsDir, moviesDir].forEach((dir) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+    // console.log(`Dossier créé : ${dir}`);
+  }
+});
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         if (file.fieldname === "movie") {
