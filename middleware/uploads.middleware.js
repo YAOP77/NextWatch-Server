@@ -35,7 +35,7 @@ const storage = multer.diskStorage({
 const fileFilter = (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
     const extAllowedMovie = [".mp4", ".avi"];
-    const extAllowedThumb = ['.jpeg', '.png', '.jpg', '.avif'];
+    const extAllowedThumb = ['.jpeg', '.png', '.jpg', '.avif', '.webp'];
 
     if (file.fieldname === "movie") {
         if (!extAllowedMovie.includes(ext)) {
