@@ -7,15 +7,18 @@ const watchLaterRoutes = require("./routes/watchLater.routes");
 const uploadRoutes = require("./routes/admin/uploads.routes");
 const categoryRoutes = require("./routes/admin/category.routes");
 const readUserRoutes = require("./routes/user/userRead.routes");
-const userMoviesPremium = require("./routes/user/userPremium.routes")
-const userPayment = require("./routes/user/userPayment.routes")
-const cors = require("cors");
+const cloudRoutes = require("../server-express/routes/admin/cloudinary.routes");
+const userMoviesPremium = require("./routes/user/userPremium.routes");
+const userPayment = require("./routes/user/userPayment.routes");
+// const cors = require("cors");
 
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // app.use(cors());
+
+app.use(cors());
 app.use(cors({
   origin: 'https://next-watch-nine.vercel.app',
   credentials: true
@@ -30,6 +33,7 @@ mongoConnect();
 app.use("/api/auth", authRoutes);
 app.use("/api/user/movies", readUserRoutes);
 app.use("/api/user/movies", userMoviesPremium);
+app.use("/api/add", cloudRoutes);
 app.use("/api/movies", uploadRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/user/favoris", favorisRoutes);
