@@ -1,7 +1,6 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
-const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
 // Recuperation du Model
 const Movies = require("../models/Movies");
 const User = require("../models/User");
@@ -167,8 +166,8 @@ const GetAllMovies = async (req, res) => {
 
         const formattedMovies = movies.map(movie => ({
             ...movie._doc,
-            thumbnailsUrl: `${BASE_URL}/${movie.thumbnailsUrl.replace(/\\/g, "/")}`,
-            moviesUrl: `${BASE_URL}/${movie.moviesUrl.replace(/\\/g, "/")}`,
+            thumbnailsUrl: movie.thumbnailsUrl,
+            moviesUrl: movie.moviesUrl,
         }));
 
         res.json(formattedMovies);
@@ -191,8 +190,8 @@ const GetMovieByCategory = async (req, res) => {
 
     const formattedMovies = movies.map(movie => ({
       ...movie._doc,
-      thumbnailsUrl: `${BASE_URL}/${movie.thumbnailsUrl.replace(/\\/g, "/")}`,
-      moviesUrl: `${BASE_URL}/${movie.moviesUrl.replace(/\\/g, "/")}`,
+      thumbnailsUrl: movie.thumbnailsUrl,
+      moviesUrl: movie.moviesUrl,
     }));
 
     res.json(formattedMovies);
@@ -227,8 +226,8 @@ const SearchMovies = async (req, res) => {
         // Formatage des URLs avec BASE_URL déjà disponible
         const formattedSearch = search.map(movie => ({
             ...movie._doc,
-            thumbnailsUrl: `${BASE_URL}/${movie.thumbnailsUrl.replace(/\\/g, "/")}`,
-            moviesUrl: `${BASE_URL}/${movie.moviesUrl.replace(/\\/g, "/")}`,
+            thumbnailsUrl: movie.thumbnailsUrl,
+            moviesUrl: movie.moviesUrl,
         }));
 
         res.json(formattedSearch);
@@ -264,8 +263,8 @@ const SearchMoviesPremium = async (req, res) => {
         // Formatage des URLs avec BASE_URL déjà disponible
         const formattedSearch = search.map(movie => ({
             ...movie._doc,
-            thumbnailsUrl: `${BASE_URL}/${movie.thumbnailsUrl.replace(/\\/g, "/")}`,
-            moviesUrl: `${BASE_URL}/${movie.moviesUrl.replace(/\\/g, "/")}`,
+            thumbnailsUrl: movie.thumbnailsUrl,
+            moviesUrl: movie.moviesUrl,
         }));
 
         res.json(formattedSearch);
@@ -285,8 +284,8 @@ const AllPremiumMovies = async (req, res) => {
 
         const formattedMovies = movies.map(movie => ({
             ...movie._doc,
-            thumbnailsUrl: `${BASE_URL}/${movie.thumbnailsUrl.replace(/\\/g, "/")}`,
-            moviesUrl: `${BASE_URL}/${movie.moviesUrl.replace(/\\/g, "/")}`,
+            thumbnailsUrl:movie.thumbnailsUrl,
+            moviesUrl: movie.moviesUrl,
         }));
 
         res.json(formattedMovies);
@@ -354,8 +353,8 @@ const ReadMovieById = async (req, res) => {
         // Construction de l'objet formaté
         const formattedMovie = {
             ...movie._doc,
-            thumbnailsUrl: `${BASE_URL}/${movie.thumbnailsUrl.replace(/\\/g, "/")}`,
-            moviesUrl: `${BASE_URL}/${movie.moviesUrl.replace(/\\/g, "/")}`,
+            thumbnailsUrl: movie.thumbnailsUrl,
+            moviesUrl: movie.moviesUrl,
         };
 
         // Si le film est premium, vérifier l'abonnement
@@ -428,8 +427,8 @@ const GetSimilarMovies = async (req, res) => {
       title: m.title,
       description: m.description,
       category: m.category,
-      thumbnailsUrl: `${BASE_URL}/${m.thumbnailsUrl.replace(/\\/g, "/")}`,
-      moviesUrl: `${BASE_URL}/${m.moviesUrl.replace(/\\/g, "/")}`,
+      thumbnailsUrl: movie.thumbnailsUrl,
+      moviesUrl: movie.moviesUrl,
     }));
 
     res.status(200).json(formattedMovies);
