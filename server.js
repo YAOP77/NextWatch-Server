@@ -10,13 +10,10 @@ const readUserRoutes = require("./routes/user/userRead.routes");
 const cloudRoutes = require("./routes/admin/cloudinary.routes");
 const userMoviesPremium = require("./routes/user/userPremium.routes");
 const userPayment = require("./routes/user/userPayment.routes");
-// const cors = require("cors");
-
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-// app.use(cors());
 
 app.use(cors());
 app.use(cors({
