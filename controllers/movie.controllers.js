@@ -421,15 +421,15 @@ const GetSimilarMovies = async (req, res) => {
       _id: { $ne: movie._id } // Pas besoin de .toString() ici
     });
 
-    // Formater les URLs absolues pour chaque film
-    const formattedMovies = similarMovies.map(m => ({
-      _id: m._id,
-      title: m.title,
-      description: m.description,
-      category: m.category,
-      thumbnailsUrl: movie.thumbnailsUrl,
-      moviesUrl: movie.moviesUrl,
-    }));
+            // Retourne les URLs telles qu'en base (Cloudinary ou autre)
+            const formattedMovies = similarMovies.map(m => ({
+                _id: m._id,
+                title: m.title,
+                description: m.description,
+                category: m.category,
+                thumbnailsUrl: m.thumbnailsUrl,
+                moviesUrl: m.moviesUrl,
+            }));
 
     res.status(200).json(formattedMovies);
   } catch (error) {
